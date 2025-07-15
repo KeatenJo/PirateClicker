@@ -77,25 +77,40 @@ text = "Upgrade!"
 layout_mode = 2
 text = "Upgrade Cost: 4"
 
-[node name="AutoClickerContainer" type="HBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -205.0
-offset_top = -15.5
-offset_bottom = 15.5
+offset_left = -294.0
+offset_top = -20.0
+offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="AutoclickerCostLabel" type="Label" parent="CanvasLayer/AutoClickerContainer"]
+[node name="AutoClickerContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AutoclickerCostLabel" type="Label" parent="CanvasLayer/VBoxContainer/AutoClickerContainer"]
 layout_mode = 2
 text = "AutoClicker Cost: 20"
 
-[node name="AutoClickerButton" type="Button" parent="CanvasLayer/AutoClickerContainer"]
+[node name="AutoClickerButton" type="Button" parent="CanvasLayer/VBoxContainer/AutoClickerContainer"]
 layout_mode = 2
 text = "Buy: AutoClicker"
+script = SubResource("GDScript_cngw8")
+
+[node name="AutoClickerUpgradeContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AutoclickerUpgradeCostLabel" type="Label" parent="CanvasLayer/VBoxContainer/AutoClickerUpgradeContainer"]
+layout_mode = 2
+text = "Upgrade Cost: 40"
+
+[node name="AutoClickerUpgradeButton" type="Button" parent="CanvasLayer/VBoxContainer/AutoClickerUpgradeContainer"]
+layout_mode = 2
+text = "Upgrade Autoclicker"
 script = SubResource("GDScript_cngw8")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
