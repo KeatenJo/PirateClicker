@@ -10,7 +10,7 @@ var autoClickerLvl: int = 1
 var autoClickerUpgradeCost: int = 40
 
 @onready var score_label: Label = $CanvasLayer/ScoreLabel
-@onready var click_button: Button = $CanvasLayer/ClickButton
+@onready var click_button: TextureButton = $CanvasLayer/ClickButton
 
 @onready var upgrade_button: Button = $CanvasLayer/UpgradeContainer/UpgradeButton
 @onready var upgrade_cost_label: Label = $CanvasLayer/UpgradeContainer/UpgradeCostLabel
@@ -22,11 +22,18 @@ var autoClickerUpgradeCost: int = 40
 @onready var auto_clicker_upgrade_label: Label = $CanvasLayer/VBoxContainer/AutoClickerUpgradeContainer/AutoclickerUpgradeCostLabel
 @onready var auto_clicker_upgrade_button: Button = $CanvasLayer/VBoxContainer/AutoClickerUpgradeContainer/AutoClickerUpgradeButton
 
+@onready var resumeButton: Button = $PauseMenu/PauseLayer/MarginContainer/VBoxContainer/ResumeButton
+@onready var quitButton: Button = $PauseMenu/PauseLayer/MarginContainer/VBoxContainer/QuitButton
+@onready var pauseLayer: CanvasLayer = $PauseMenu/PauseLayer
+
 func _ready() -> void:
 	click_button.pressed.connect(_on_click_button_pressed)
 	upgrade_button.pressed.connect(upgrade_button_payout)
 	auto_clicker_button.pressed.connect(auto_clicker_button_pressed)
 	auto_clicker_upgrade_button.pressed.connect(autoClickerUpgrade)
+	
+	quitButton.pressed.connect(_on_quit_button_pressed)
+	resumeButton.pressed.connect(_on_resume_button_pressed)
 	
 	update_score_label()
 	
@@ -111,5 +118,18 @@ func updateAutoClickerUpgradeLabel():
 			
 func updateAutClickerUpgradeLevel():
 	auto_clicker_upgrade_button.text = "LVL: %d" % autoClickerLvl
+	
+func _input(event):
+	if Input.is_action_just_pressed("EscapePressed"):
+		get_tree().paused = true
+		pauseLayer.visible = true
 		
+		
+func _on_quit_button_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://mainMenu.tscn")
+	
+func _on_resume_button_pressed():
+	get_tree().paused = false
+	pauseLayer.visible = false
 		

@@ -9,7 +9,6 @@ func _ready():
 	newGameButton.pressed.connect(loadNewGameScene)
 	quitButton.pressed.connect(quitGame)
 	creditsButton.pressed.connect(loadCreditsScene) 
-	#TODO: add credits button and quit button
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

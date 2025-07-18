@@ -2,20 +2,7 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_lgf7p"]
 [ext_resource type="Script" path="res://QuitButton.gd" id="2_a24jb"]
-
-[sub_resource type="GDScript" id="GDScript_v0277"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
+[ext_resource type="Texture2D" uid="uid://gd21uo1fm2nx" path="res://PirateClickerTreasureChest.png" id="2_bx41h"]
 
 [sub_resource type="GDScript" id="GDScript_cngw8"]
 script/source = "extends Button
@@ -32,25 +19,24 @@ func _process(delta):
 "
 
 [node name="Main" type="Node2D"]
+process_mode = 1
 script = ExtResource("1_lgf7p")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ClickButton" type="Button" parent="CanvasLayer"]
+[node name="ClickButton" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -38.5
-offset_top = -15.5
-offset_right = 38.5
-offset_bottom = 15.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-action_mode = 0
-text = "Click Me!"
-script = SubResource("GDScript_v0277")
+texture_normal = ExtResource("2_bx41h")
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 10
@@ -102,6 +88,7 @@ text = "Buy: AutoClicker"
 script = SubResource("GDScript_cngw8")
 
 [node name="AutoClickerUpgradeContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="AutoclickerUpgradeCostLabel" type="Label" parent="CanvasLayer/VBoxContainer/AutoClickerUpgradeContainer"]
@@ -127,6 +114,46 @@ layout_mode = 2
 text = "Quit
 "
 script = ExtResource("2_a24jb")
+
+[node name="PauseMenu" type="Node2D" parent="."]
+process_mode = 2
+visible = false
+
+[node name="PauseLayer" type="CanvasLayer" parent="PauseMenu"]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PauseLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PauseLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PauseLabel" type="Label" parent="PauseMenu/PauseLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Paused
+"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/PauseLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="PauseMenu/PauseLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit"
 
 [connection signal="mouse_entered" from="CanvasLayer/ClickButton" to="." method="_on_click_button_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/ClickButton" to="." method="_on_click_button_mouse_exited"]
